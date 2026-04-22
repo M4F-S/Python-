@@ -1,0 +1,15 @@
+# Secrets: never commit real env values.
+.env
+*.env
+!.env.example
+
+# Virtualenvs
+.venv/
+venv/
+matrix_env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.pytest_cache/

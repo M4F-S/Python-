@@ -1,0 +1,3 @@
+# TODO: ignore .env but NOT .env.example.
+# TODO: ignore virtualenv dirs.
+# TODO: ignore __pycache__.
