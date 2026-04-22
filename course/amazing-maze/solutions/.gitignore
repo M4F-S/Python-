@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.pytest_cache/
+build/
+dist/
+*.egg-info/
+# The subject requires the built wheel at the project root - track it.
+!mazegen-*.whl
+!mazegen-*.tar.gz
+.venv/
+venv/
+maze.txt
