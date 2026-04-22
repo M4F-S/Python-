@@ -23,9 +23,31 @@ course/
 │   └── solutions/           ← reference solutions (DO NOT peek first)
 ├── module-01-oop/
 │   └── ... same structure ...
-├── ...
-└── module-amazing-maze/
+├── module-02-errors/
+├── module-03-collections/
+├── module-04-fileio/
+├── module-05-polymorphism/
+├── module-06-imports/
+├── module-07-abstract/
+├── module-08-matrix/
+├── module-09-pydantic/
+├── module-10-functional/
+└── amazing-maze/                ← capstone (mazegen wheel + a_maze_ing.py)
 ```
+
+## Status
+
+All 11 modules plus the Amazing capstone are scaffolded with:
+
+- `lesson.md` covering the concepts + a C-to-Python map.
+- `examples/` runnable tours.
+- `exercises/` starter files for you to fill in.
+- `solutions/` reference implementations whose output matches the
+  subject PDFs verbatim (where the PDFs show expected output).
+
+The Amazing project ships with a working `mazegen-1.0.0-py3-none-any.whl`
+produced from its `pyproject.toml`; `pip install`ing that wheel into a
+clean venv gives you a working `MazeGenerator` class.
 
 ## The honor-system solutions policy
 
@@ -73,11 +95,11 @@ cd module-00-fundamentals
 | 04 | File I/O (Data Archivist) | `py-04.pdf` | open/read/write, streams, context managers |
 | 05 | Polymorphism (Code Nexus) | `py-05.pdf` | abstract classes, method overriding, pipelines |
 | 06 | Imports (The Codex) | `py-06.pdf` | packages, `__init__.py`, relative vs absolute |
-| 07 | Abstract architectures (DataDeck) | `py-07.pdf` | ABCs, protocols, strategy pattern |
-| 08 | Virtualenvs & packaging (The Matrix) | `py-08.pdf` | `venv`, `pip`, `requirements.txt`, `.env` |
-| 09 | Pydantic (Cosmic Data) | `py-09.pdf` | models, validators, nested schemas |
-| 10 | Functional programming (FuncMage) | `py-10.pdf` | lambda, HOF, decorators, recursion |
-| ★ | Amazing — maze generator | `Amazing.pdf` | final capstone, combines everything |
+| 07 | Abstract architectures (DataDeck) | `py-07.pdf` | ABCs, mixins, strategy pattern, factories |
+| 08 | Virtualenvs & packaging (The Matrix) | `py-08.pdf` | `venv`, `pip`, `pyproject.toml`, `.env` |
+| 09 | Pydantic (Cosmic Data) | `py-09.pdf` | BaseModel, Field, model_validator, nested schemas |
+| 10 | Functional programming (FuncMage) | `py-10.pdf` | lambda, HOF, closures, functools, decorators |
+| ★ | Amazing — maze generator | `Amazing.pdf` | capstone: ships a pip-installable wheel |
 
 ## Submission rules (important!)
 
