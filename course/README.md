@@ -35,6 +35,20 @@ course/
 └── amazing-maze/                ← capstone (mazegen wheel + a_maze_ing.py)
 ```
 
+## Running the test suite
+
+A pytest suite lives under `course/tests/` and exercises every reference
+solution — script subprocesses for the self-executing modules, direct
+imports for Module 00 (the 42 subject forbids `if __name__ == "__main__":`
+blocks there). From inside the course venv:
+
+```bash
+pytest tests/                 # 39 tests, runs in ~2-3s
+```
+
+The suite also verifies that `mazegen-1.0.0-py3-none-any.whl` unzips to
+the expected files and that the public API works end-to-end.
+
 ## Status
 
 All 11 modules plus the Amazing capstone are scaffolded with:
