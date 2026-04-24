@@ -1,0 +1,54 @@
+name: classroom
+
+# GitHub Classroom grader: runs the per-exercise tests against a
+# student's `course/module-*/exercises/` submission and posts the
+# result as a PR check and comment.
+#
+# This workflow is a no-op when there are no exercise submissions, so
+# it's safe to merge into the instructor repo.
+
+on:
+  push:
+    branches: [student/**, submission/**]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+    paths:
+      - "course/module-*/exercises/**"
+      - "course/amazing-maze/exercises/**"
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        working-directory: course
+        run: |
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Run exercise tests
+        working-directory: course
+        id: grade
+        run: |
+          set +e
+          pytest tests/exercises/ -q --tb=short --junitxml=junit.xml
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+          set -e
+
+      - name: Summarise results
+        if: always()
+        working-directory: course
+        run: |
+          python tools/summarise_junit.py junit.xml >> $GITHUB_STEP_SUMMARY
+
+      - name: Fail on errors
+        if: steps.grade.outputs.exit_code != '0'
+        run: exit 1

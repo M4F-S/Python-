@@ -1,2 +1,8 @@
-pydantic>=2.0
+# Core runtime deps used across the course.
+# For the full development setup (docs, notebooks, anki, linting)
+# install the package with extras: `pip install -e .[dev,docs]`
+# or use `uv sync` to install from the lockfile.
+
+pydantic>=2,<3
+python-dotenv>=1.0
 pytest>=7.0

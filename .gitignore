@@ -18,3 +18,13 @@ env/
 *.swo
 .idea/
 .vscode/
+
+# MkDocs build output
+course/site/
+
+# Course progress (per-cadet local state)
+course/.course-progress.json
+
+# Classroom workflow artefacts
+junit.xml
+

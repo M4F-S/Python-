@@ -1,0 +1,75 @@
+site_name: 42 Berlin — Python Rank 2
+site_description: >-
+  Self-paced course with lessons, exercises, and reference solutions
+  for the 42 Berlin Rank 2 Python track.
+repo_url: https://github.com/m4f-s/Python-
+repo_name: m4f-s/Python-
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.instant
+    - navigation.tracking
+    - content.code.copy
+    - content.code.annotate
+    - toc.integrate
+    - search.highlight
+    - search.suggest
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - Home: index.md
+  - Setup: setup.md
+  - C → Python: c-to-python.md
+  - Modules:
+      - "00 — Fundamentals": modules/00-fundamentals.md
+      - "01 — OOP": modules/01-oop.md
+      - "02 — Errors": modules/02-errors.md
+      - "03 — Collections": modules/03-collections.md
+      - "04 — File I/O": modules/04-fileio.md
+      - "05 — Polymorphism": modules/05-polymorphism.md
+      - "06 — Imports": modules/06-imports.md
+      - "07 — Abstract architectures": modules/07-abstract.md
+      - "08 — Virtualenvs & packaging": modules/08-matrix.md
+      - "09 — Pydantic": modules/09-pydantic.md
+      - "10 — Functional programming": modules/10-functional.md
+      - "★ — Amazing (maze generator)": modules/amazing-maze.md
+  - Upgrades: upgrades.md
+  - Test harness: tests.md
+
+plugins:
+  - search

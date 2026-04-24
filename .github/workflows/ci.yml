@@ -1,0 +1,74 @@
+name: ci
+
+on:
+  push:
+    branches: [main, "claude/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: pytest + lint (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        working-directory: course
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install flake8 mypy pytest
+
+      - name: flake8
+        working-directory: course
+        run: |
+          flake8 --max-line-length=100 --extend-ignore=E203,W503 \
+            module-*/solutions module-*/examples tests course_cli tools \
+            || true
+        # CI reports flake8 issues but doesn't fail on them yet - the
+        # solutions were written before linting was wired in. Remove
+        # `|| true` once the codebase is clean.
+
+      - name: mypy (reference solutions)
+        working-directory: course
+        run: |
+          mypy --ignore-missing-imports --check-untyped-defs \
+            module-0{5,6,7,9}-*/solutions module-10-functional/solutions \
+            || true
+        # Same graceful fallback until every solution is strict-clean.
+
+      - name: pytest
+        working-directory: course
+        run: pytest tests/ -v
+
+      - name: Build mazegen wheel
+        working-directory: course/amazing-maze/solutions
+        run: |
+          pip install build
+          python -m build
+
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install pre-commit
+        run: pip install pre-commit
+      - name: Run pre-commit
+        run: pre-commit run --all-files --show-diff-on-failure
+        continue-on-error: true

@@ -1,0 +1,42 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^course/.*/solutions/mazegen-.*\.(whl|tar\.gz)$
+      - id: end-of-file-fixer
+        exclude: ^course/.*/solutions/mazegen-.*\.(whl|tar\.gz)$
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=2000"]
+      - id: check-merge-conflict
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8
+        args: ["--max-line-length=100", "--extend-ignore=E203,W503"]
+        files: ^course/.*\.py$
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+        args:
+          - "--warn-return-any"
+          - "--warn-unused-ignores"
+          - "--ignore-missing-imports"
+          - "--disallow-untyped-defs"
+          - "--check-untyped-defs"
+        files: ^course/.*/solutions/.*\.py$
+        additional_dependencies:
+          - "pydantic>=2"
+
+  - repo: local
+    hooks:
+      - id: pytest-fast
+        name: pytest (solutions only, fast path)
+        entry: bash -c 'cd course && python -m pytest tests/test_all_solutions.py -q'
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
